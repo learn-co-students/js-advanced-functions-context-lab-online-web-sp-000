@@ -37,7 +37,8 @@ function createTimeEvent( timestamp, type ) {
 
 function createTimeInEvent( timeStamp ) {
   let [ date, hour ] = timeStamp.split( ' ' )
-  this.timeInEvents.push( createTimeEvent( timeStamp, TIME_IN ))
+  this.timeInEvents =
+    [ ...this.timeInEvents, createTimeEvent( timeStamp, TIME_IN ) ]
 
   return this
 }

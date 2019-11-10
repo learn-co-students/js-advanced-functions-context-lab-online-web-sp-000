@@ -29,33 +29,29 @@ function createEmployeeRecords( arrs ) {
 }
 
 function createTimeEvent( timestamp, type ) {
-  let [ date, hourStr ] = timestamp.split( ' ' )
-  let hour = parseInt( hourStr )
-
-  return { type, hour, date }
+  let [ date, hour ] = timestamp.split( ' ' )
+  return {
+    date,
+    hour: parseInt( hour, 10 ),
+    type
+  }
 }
 
 function createTimeInEvent( timeStamp ) {
-  let [ date, hour ] = timeStamp.split( ' ' )
-  this.timeInEvents =
-    [ ...this.timeInEvents, createTimeEvent( timeStamp, TIME_IN ) ]
-
+  this.timeInEvents.push( createTimeEvent( timeStamp, TIME_IN ))
   return this
 }
 
 function createTimeOutEvent( timeStamp ) {
-  let [ date, hour ] = timeStamp.split( ' ' )
   this.timeOutEvents.push( createTimeEvent( timeStamp, TIME_OUT ))
-
   return this
 }
 
 function hoursWorkedOnDate( date ) {
   let inEvent = this.timeInEvents.find( x => x.date == date )
   let outEvent = this.timeOutEvents.find( x => x.date == date )
-  let hoursWorked = ( outEvent.hour - inEvent.hour ) / 100
 
-  return hoursWorked
+  return ( outEvent.hour - inEvent.hour ) / 100
 }
 
 function wagesEarnedOnDate( date ) {
@@ -63,9 +59,7 @@ function wagesEarnedOnDate( date ) {
 }
 
 function allWagesFor() {
-  let dates = this.timeInEvents.map( function( event ) {
-      return event.date
-  })
+  let dates = this.timeInEvents.map( ( event ) => event.date )
 
   let payable = dates.reduce( function( memo, date ) {
       return memo + wagesEarnedOnDate.call( this, date )
@@ -75,9 +69,8 @@ function allWagesFor() {
 }
 
 function calculatePayroll( records ) {
-  return records.reduce( function( total, record ) {
-    return total += allWagesFor.call( record )
-  }, 0)
+  return records.reduce(( total, record ) =>
+    total += allWagesFor.call( record ), 0)
 }
 
 function findEmployeeByFirstName( records, firstName ) {

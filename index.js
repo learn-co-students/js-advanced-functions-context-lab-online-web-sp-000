@@ -59,11 +59,11 @@ function wagesEarnedOnDate( date ) {
 }
 
 function allWagesFor() {
-  let dates = this.timeInEvents.map( ( event ) => event.date )
+  let dates = this.timeInEvents.map(( event ) => event.date )
 
-  let payable = dates.reduce( function( memo, date ) {
+  let payable = dates.reduce(( memo, date ) => {
       return memo + wagesEarnedOnDate.call( this, date )
-  }.bind( this ), 0) // <== Hm, why did we need to add bind() there? We'll discuss soon!
+  }, 0) // <== Hm, why did we need to add bind() there? We'll discuss soon!
 
   return payable
 }

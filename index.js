@@ -1,13 +1,55 @@
-/* Your Code Here */
+let createEmployeeRecord = function(eArr){
+    return {
+        firstName: eArr[0],
+        familyName: eArr[1],
+        title: eArr[2],
+        payPerHour: eArr[3],
+        timeInEvents: [],
+        timeOutEvents: []
+    }
+}
 
-/*
- We're giving you this function. Take a look at it, you might see some usage
- that's new and different. That's because we're avoiding a well-known, but
- sneaky bug that we'll cover in the next few lessons!
+let createEmployeeRecords = function(eArrays) {
+    return eArrays.map(function(eArr){
+        return createEmployeeRecord(eArr)
+    })
+}
 
- As a result, the lessons for this function will pass *and* it will be available
- for you to use if you need it!
- */
+let createTimeInEvent = function(inTime){
+  let [date, hour] = inTime.split(' ')
+
+    this.timeInEvents.push({
+        type: "TimeIn",
+        hour: parseInt(hour, 10),
+        date,
+    })
+
+    return this
+}
+
+let createTimeOutEvent = function(OutTime){
+  let [date, hour] = OutTime.split(' ')
+
+    this.timeOutEvents.push({
+        type: "TimeOut",
+        hour: parseInt(hour, 10),
+        date,
+    })
+
+    return this
+}
+
+let hoursWorkedOnDate = function(date){
+    let inEvent = this.timeInEvents.find(function(e){
+        return e.date === date
+    })
+
+    let outEvent = this.timeOutEvents.find(function(e){
+        return e.date === date
+    })
+
+    return (outEvent.hour - inEvent.hour) / 100
+}
 
 let allWagesFor = function () {
     let eligibleDates = this.timeInEvents.map(function (e) {

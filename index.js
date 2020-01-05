@@ -26,18 +26,21 @@
     return records.map(em=>createEmployeeRecord(em))
  }
 
+
  function createTimeInEvent(time){
+
     let newTimeinEvent = {
       type: "TimeIn",
       date: time.slice(0,10),
       hour: parseInt(time.slice(11))
     }
 
-
     this.timeInEvents.push(newTimeinEvent)
     return this
 
  }
+
+
 
  function createTimeOutEvent(time){
     let newTimeOutEvent = {
@@ -45,7 +48,6 @@
       date: time.slice(0,10),
       hour: parseInt(time.slice(11))
     }
-
 
     this.timeOutEvents.push(newTimeOutEvent)
     return this
@@ -57,8 +59,11 @@
    let timeInObj = this.timeInEvents.find(x=>x.date==date)
    let timeOutObj = this.timeOutEvents.find(x=>x.date==date)
 
-   return (timeOutObj.hour - timeInObj.hour)/100
+  return (timeOutObj.hour - timeInObj.hour)/100
+
+
  }
+
 
  function wagesEarnedOnDate(time){
    let hours = hoursWorkedOnDate.call(this,time)

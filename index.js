@@ -65,12 +65,6 @@ let allWagesFor = function () {
     return payable
 }
 
-// let payrollExpense = function() {
-//         console.log(this * 1000)
-// //     dates = this.timeInEvents.map(e => e.date);
-// //     return dates
-// }
-
 function calculatePayroll(records) {
    return records.reduce((total, val) => total + allWagesFor.call(val), 0)
 }

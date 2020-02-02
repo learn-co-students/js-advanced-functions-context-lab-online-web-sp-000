@@ -1,25 +1,59 @@
 /* Your Code Here */
-let allRecords = function(firstName){}
 
-let createEmployeeRecord = function(firstName, familyName, title, payPerHour){
+let createEmployeeRecord = function(array){
   let obj = {
-    "firstName": firstName,
-    "familyName": familyName,
-    "title": title,
-    "payPerHour": payPerHour,
+    "firstName": array[0],
+    "familyName": array[1],
+    "title": array[2],
+    "payPerHour": array[3],
     "timeInEvents": [],
     "timeOutEvents": []
   }
   return obj;
 }
 
-let createEmployeeRecords = function(){}
-let createTimeInEvent = function(){}
-let createTimeOutEvent = function(){}
-let hoursWorkedOnDate = function(){}
-let wagesEarnedOnDate = function(){}
+let createEmployeeRecords = function(array){
+  return array.map(x => createEmployeeRecord(x));
+}
+
+let findEmployeeByFirstName = function(allEmployeesArray, firstName){
+  return allEmployeesArray.find(x => x.firstName === firstName);
+}
+
+
+let createTimeInEvent = function(date){
+  let [day, hour] = date.split(" ");
+  this.timeInEvents.push({"type": "TimeIn", "date": day, "hour": parseInt(hour)});
+  return this;
+}
+
+let createTimeOutEvent = function(date){
+  let [day, hour] = date.split(" ");
+  this.timeOutEvents.push({"type": "TimeOut", "date": day, "hour": parseInt(hour)});
+  return this;
+}
+
+let hoursWorkedOnDate = function(date){
+  let timeOut = this.timeOutEvents.find(x => x.date === date).hour;
+  let timeIn = this.timeInEvents.find(x => x.date === date).hour;
+  console.log(timeOut);
+  return (timeOut - timeIn)/100;
+  //        expect(hoursWorkedOnDate.call(cRecord, "44-03-15")).to.equal(2)
+
+}
+
+let wagesEarnedOnDate = function(date){
+  return (this.payPerHour * hoursWorkedOnDate.call(this, date));
+}
+
+let calculatePayroll = function(records){
+  return records.reduce((memo, rec) => memo + allWagesFor.call(rec), 0);
+}
+
 let payrollExpense = function(){}
-let calculatePayroll = function(){}
+let allRecords = function(){}
+
+
 //let wagesEarnedOnDate = function(){}
 //let wagesEarnedOnDate = function(){}
 

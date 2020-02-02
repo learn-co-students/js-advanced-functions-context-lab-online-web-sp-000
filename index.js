@@ -1,4 +1,27 @@
 /* Your Code Here */
+let allRecords = function(firstName){}
+
+let createEmployeeRecord = function(firstName, familyName, title, payPerHour){
+  let obj = {
+    "firstName": firstName,
+    "familyName": familyName,
+    "title": title,
+    "payPerHour": payPerHour,
+    "timeInEvents": [],
+    "timeOutEvents": []
+  }
+  return obj;
+}
+
+let createEmployeeRecords = function(){}
+let createTimeInEvent = function(){}
+let createTimeOutEvent = function(){}
+let hoursWorkedOnDate = function(){}
+let wagesEarnedOnDate = function(){}
+let payrollExpense = function(){}
+let calculatePayroll = function(){}
+//let wagesEarnedOnDate = function(){}
+//let wagesEarnedOnDate = function(){}
 
 /*
  We're giving you this function. Take a look at it, you might see some usage

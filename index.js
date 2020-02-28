@@ -1,22 +1,68 @@
-/* Your Code Here */
+let createEmployeeRecord = function(array) {
+    return {
+       firstName: array[0],
+       familyName: array[1],
+       title: array[2],
+       payPerHour: array[3],
+       timeInEvents: [],
+       timeOutEvents: []
+    }
+}
 
-/*
- We're giving you this function. Take a look at it, you might see some usage
- that's new and different. That's because we're avoiding a well-known, but
- sneaky bug that we'll cover in the next few lessons!
+function createEmployeeRecords(arrayOfArrays) {
+    return arrayOfArrays.map(arrayObj => {
+        return createEmployeeRecord(arrayObj)
+    })
+}
 
- As a result, the lessons for this function will pass *and* it will be available
- for you to use if you need it!
- */
+function createTimeInEvent(dateStamp) {
+    let [date, hour] = dateStamp.split(' ')
+    this.timeInEvents.push({
+        type: "TimeIn",
+        hour: parseInt(hour, 10),
+        date: date
+    })  
+    return this
+}
 
-let allWagesFor = function () {
-    let eligibleDates = this.timeInEvents.map(function (e) {
+function createTimeOutEvent(dateStamp) {
+    let [date, hour] = dateStamp.split(' ')
+    this.timeOutEvents.push({
+        type: "TimeOut",
+        hour: parseInt(hour, 10),
+        date: date
+    })
+    return this
+}
+
+function hoursWorkedOnDate(dateWorked){
+    let timeIn = this.timeInEvents.find(dayWorked => {return dayWorked.date === dateWorked});
+    let timeOut = this.timeOutEvents.find(dayWorked => {return dayWorked.date === dateWorked});
+    return (timeOut.hour - timeIn.hour)/100
+}
+
+function wagesEarnedOnDate(dateWorked) {
+    let hoursWorked = hoursWorkedOnDate.call(this, dateWorked)
+    return hoursWorked * this.payPerHour
+}
+
+let allWagesFor = function(){
+    let eligibleDates = this.timeInEvents.map(function(e){
         return e.date
     })
-
-    let payable = eligibleDates.reduce(function (memo, d) {
+    let payable = eligibleDates.reduce(function(memo, d){
         return memo + wagesEarnedOnDate.call(this, d)
-    }.bind(this), 0) // <== Hm, why did we need to add bind() there? We'll discuss soon!
-
+    }.bind(this), 0)
     return payable
+}
+
+function findEmployeeByFirstName(scrArray, employeeName) {
+    return scrArray.find(name => name.firstName === employeeName)
+}
+
+
+function calculatePayroll(employeeRecords) {
+    return employeeRecords.reduce((employee, records) => {
+        return employee + allWagesFor.call(records)
+    }, 0)
 }

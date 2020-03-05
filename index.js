@@ -1,4 +1,73 @@
-/* Your Code Here */
+function createEmployeeRecord(employeeArray){
+    return {
+        firstName: employeeArray[0],
+        familyName: employeeArray[1],
+        title: employeeArray[2],
+        payPerHour: employeeArray[3],
+        timeInEvents: [],
+        timeOutEvents: []
+    } 
+}
+
+function createEmployeeRecords(allEmployees){
+    return allEmployees.map( (employee) => {
+        return createEmployeeRecord.call(this, employee);
+    });
+}
+
+function createTimeInEvent(dateStamp){
+    this.timeInEvents.push(createEvent("TimeIn", dateStamp))
+    return this
+}
+
+function createTimeOutEvent(dateStamp){
+    this.timeOutEvents.push(createEvent("TimeOut", dateStamp))
+    return this
+}
+
+function createEvent(type, dateStamp){
+    const [date, hour] = dateStamp.split(" ");
+
+    return {
+        type: type,
+        hour: parseInt(hour),
+        date: date
+    }
+}
+
+function hoursWorkedOnDate(dateStamp){
+    const findByDate = (event) => { return event.date === dateStamp };
+    const getHourFromDate = function() { return this.find(findByDate).hour };
+    
+    const inTime = getHourFromDate.call(this.timeInEvents);
+    const outTime = getHourFromDate.call(this.timeOutEvents);
+
+    return (outTime - inTime) / 100
+}
+
+function wagesEarnedOnDate(dateStamp){
+    return hoursWorkedOnDate.call(this, dateStamp) * this.payPerHour
+}
+
+function findEmployeeByFirstName(employees, firstName){
+    return employees.find( (employee) => {
+        return employee.firstName === firstName
+    });
+}
+
+function calculatePayroll(allEmployees){
+
+    const allWagesFor = function(){
+        //this = employee record
+        return this.timeOutEvents.reduce( (allEmployeeWages, event) => {
+            return allEmployeeWages + wagesEarnedOnDate.call(this, event.date)
+        }, 0)
+    }    
+    
+    return allEmployees.reduce( (totalWages, employee) => {
+        return totalWages + allWagesFor.call(employee)
+    }, 0);
+}
 
 /*
  We're giving you this function. Take a look at it, you might see some usage

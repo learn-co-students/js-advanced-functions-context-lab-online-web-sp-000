@@ -9,7 +9,7 @@
  for you to use if you need it!
  */
 
-let createEmployeeRecord = function(row){
+let createEmployeeRecord = function (row) {
     return {
         firstName: row[0],
         familyName: row[1],

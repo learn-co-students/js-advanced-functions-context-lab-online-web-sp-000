@@ -1,13 +1,79 @@
 /* Your Code Here */
+function createEmployeeRecord(recordArray) {
+    const [firstName, familyName, title, payRate] = recordArray
+    return {
+       firstName: firstName,
+       familyName: familyName,
+       title: title,
+       payPerHour: payRate,
+       timeInEvents: [],
+       timeOutEvents: []
+    }
+ }
 
-/*
- We're giving you this function. Take a look at it, you might see some usage
- that's new and different. That's because we're avoiding a well-known, but
- sneaky bug that we'll cover in the next few lessons!
+ function createEmployeeRecords(nestedArray){
+    return nestedArray.map(createEmployeeRecord)
+}
 
- As a result, the lessons for this function will pass *and* it will be available
- for you to use if you need it!
- */
+function createTimeInEvent(timeStamp){
+    const timeArray = timeStamp.split(" ")
+    const hour = parseInt(timeArray[1])
+    const date = timeArray[0]
+    const newTimeInObj = {
+        type: "TimeIn",
+        hour: hour,
+        date: date
+     }
+     this.timeInEvents.push(newTimeInObj)
+    return this
+}
+
+function createTimeOutEvent(timeStamp){
+    const timeArray = timeStamp.split(" ")
+    const hour = parseInt(timeArray[1])
+    const date = timeArray[0]
+    const newTimeInObj = {
+        type: "TimeOut",
+        hour: hour,
+        date: date
+     }
+     this.timeOutEvents.push(newTimeInObj)
+    return this
+}
+function hoursWorkedOnDate(date){
+    const timeIn = this.timeInEvents.find(timeIn => timeIn.date === date)
+    const timeOut = this.timeOutEvents.find(timeOut => timeOut.date === date)
+
+    const hoursWorked = (timeOut.hour - timeIn.hour) / 100
+   return hoursWorked
+
+}
+
+function wagesEarnedOnDate(date){
+    const hoursWorked = hoursWorkedOnDate.call(this, date)
+   const payRate = this.payPerHour
+
+   const payForDate = hoursWorked * payRate
+   return payForDate
+
+   
+}
+
+function calculatePayroll(record){
+    const allEmpWages = record.map(empObj => allWagesFor.call(empObj))
+    let allEmpWagesTotal = allEmpWages.reduce((empWage, value) => value + empWage, 0)
+    return allEmpWagesTotal
+
+    
+
+
+}
+
+function findEmployeeByFirstName(record, name){
+    return record.find(record => record.firstName === name)
+
+
+}
 
 let allWagesFor = function () {
     let eligibleDates = this.timeInEvents.map(function (e) {

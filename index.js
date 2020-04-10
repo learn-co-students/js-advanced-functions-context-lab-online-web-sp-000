@@ -45,12 +45,17 @@ let hoursWorkedOnDate = function(specificDate) {
     let outEvent = this.timeOutEvents.find(function(e) {
         return e.date === specificDate
     })
-    console.log((outEvent.hour - inEvent.hour) /100)
     return (outEvent.hour - inEvent.hour) / 100
 }
 
 let wagesEarnedOnDate = function(specificDate) {
-    return hoursWorkedOnDate(specificDate, this) * this.payPerHour;
+    let hours = hoursWorkedOnDate.call(specificDate)
+    let wage = this.payPerHour
+    wage = wage * hours
+
+    console.log(wage.toString())
+   return wage
+
 }
 
 /*

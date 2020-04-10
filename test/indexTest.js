@@ -38,7 +38,8 @@ describe("The payroll system", function () {
       })
     })
   })
-
+})
+/*
   describe("process an Array of Arrays into an Array of employee records", function () {
     it("has a function called createEmployeeRecords", function () {
       expect(createEmployeeRecords).to.exist
@@ -284,7 +285,7 @@ describe("The payroll system", function () {
        *
        * Why go for smart when you can go for artificially intelligent? -- Ultron
        * Consulting
-       */
+
       const csvDataEmployees = [
         ["Thor", "Odinsson", "Electrical Engineer", 45],
         ["Loki", "Laufeysson-Odinsson", "HR Representative", 35],
@@ -345,6 +346,6 @@ describe("The payroll system", function () {
       })
     })
   })
-})
-
+}
+*/
 

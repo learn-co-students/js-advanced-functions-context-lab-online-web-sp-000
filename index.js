@@ -49,13 +49,10 @@ let hoursWorkedOnDate = function(specificDate) {
 }
 
 let wagesEarnedOnDate = function(specificDate) {
-    let hours = hoursWorkedOnDate.call(specificDate)
+    let hours = hoursWorkedOnDate.call(this,specificDate)
     let wage = this.payPerHour
     wage = wage * hours
-
-    console.log(wage.toString())
    return wage
-
 }
 
 /*
@@ -77,4 +74,13 @@ let allWagesFor = function () {
     }.bind(this), 0) // <== Hm, why did we need to add bind() there? We'll discuss soon!
 
     return payable
+}
+
+let calculatePayroll = function(employees) {
+    return wagesEarnedOnDate.call(this, employees)
+}
+
+let findEmployeeByFirstName = function(srcArray, firstName) {
+    let name = srcArray.find(element => element === firstName)
+    console.log(name);
 }

@@ -76,11 +76,13 @@ let allWagesFor = function () {
     return payable
 }
 
-let calculatePayroll = function(employees) {
-    return wagesEarnedOnDate.call(this, employees)
+let findEmployeeByFirstName = function(srcArray, firstName) {
+    return srcArray.find(element => element.firstName === firstName)
 }
 
-let findEmployeeByFirstName = function(srcArray, firstName) {
-    let name = srcArray.find(element => element === firstName)
-    console.log(name);
+
+let calculatePayroll = function(arrayOfEmployeeRecords) {
+    return arrayOfEmployeeRecords.reduce(function (memo, record) {
+        return memo + allWagesFor.call(record)
+    }, 0)
 }

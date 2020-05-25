@@ -1,4 +1,41 @@
 /* Your Code Here */
+function createEmployeeRecord(array) {
+    return {
+        firstName: array[0],
+        familyName: array[1],
+        title: array[2],
+        payPerHour: array[3],
+        timeInEvents: [],
+        timeOutEvents: []
+    };
+};
+
+function createEmployeeRecords(arrayOfArrays) {
+    return arrayOfArrays.map(x => createEmployeeRecord(x))
+};
+
+function createTimeInEvent(date) {
+    let dateTime = date.split(" ")
+    this.timeInEvents.push({type: 'TimeIn', hour: parseInt(dateTime[1]), date: dateTime[0]})
+    return this
+};
+
+function createTimeOutEvent(date) {
+    let dateTime = date.split(" ")
+    this.timeOutEvents.push({type: 'TimeOut', hour: parseInt(dateTime[1]), date: dateTime[0]})
+    return this
+}
+
+function hoursWorkedOnDate(date) {
+    let timeIn = this.timeInEvents.filter(x => x.date === date)[0]
+    let timeOut = this.timeOutEvents.filter(x => x.date === date)[0]
+
+    return (timeOut.hour - timeIn.hour) / 100
+}
+
+function wagesEarnedOnDate(date) {
+    return hoursWorkedOnDate.call(this, date) * this.payPerHour
+}
 
 /*
  We're giving you this function. Take a look at it, you might see some usage
@@ -19,4 +56,13 @@ let allWagesFor = function () {
     }.bind(this), 0) // <== Hm, why did we need to add bind() there? We'll discuss soon!
 
     return payable
+}
+
+let calculatePayroll = function(array) {
+    let totalWages = array.map(x => allWagesFor.call(x))
+    return totalWages.reduce((wages, total) => wages + total, 0)
+}
+
+let findEmployeeByFirstName = function(array, firstName) {
+    return array.filter(x => x.firstName === firstName)[0]
 }

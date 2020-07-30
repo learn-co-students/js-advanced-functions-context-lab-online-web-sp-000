@@ -1,5 +1,67 @@
 /* Your Code Here */
 
+const createEmployeeRecord = arr => {
+    return {
+        firstName: arr[0],
+        familyName: arr[1],
+        title: arr[2],
+        payPerHour: arr[3],
+        timeInEvents: [],
+        timeOutEvents: []
+    }
+}
+
+const createEmployeeRecords = arr => {
+    return arr.map(x => createEmployeeRecord(x))
+}
+
+function createTimeInEvent(dateTime) {
+    this.timeInEvents.push({
+        type: "TimeIn",
+        date: dateTime.split(' ')[0],
+        hour: parseInt(dateTime.split(' ')[1])
+    })
+    return this 
+}
+
+function createTimeOutEvent(dateTime) {
+    this.timeOutEvents.push({
+        type: "TimeOut",
+        date: dateTime.split(' ')[0],
+        hour: parseInt(dateTime.split(' ')[1])
+    })
+    return this 
+}
+
+function hoursWorkedOnDate(date) {
+    const timeIn = this.timeInEvents.find(d => d.date === date).hour / 100
+    const timeOut = this.timeOutEvents.find(d => d.date === date).hour / 100
+    return timeOut - timeIn
+}
+
+function wagesEarnedOnDate(date) {
+    return hoursWorkedOnDate.call(this, date) * this.payPerHour
+}
+
+const calculatePayroll = employees => {
+    return employees.reduce((m, e) => m + allWagesFor.call(e), 0)
+  }
+  
+  const findEmployeeByFirstName = (employees, name) => {
+    return employees.find(e => e.firstName === name)
+  }
+
+
+
+
+
+
+
+
+
+
+
+
 /*
  We're giving you this function. Take a look at it, you might see some usage
  that's new and different. That's because we're avoiding a well-known, but

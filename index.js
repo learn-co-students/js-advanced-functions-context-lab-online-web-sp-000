@@ -37,13 +37,13 @@ let createTimeOutEvent = function (dateStamp) {
   return this;
 };
 
-let hoursWorkedOnDate = function (date) {
+let hoursWorkedOnDate = function (d) {
   let hours = 0;
-  let clockIn = this.timeInEvents.map(function (key) {
-    return key.date;
+  let clockIn = this.timeInEvents.map(function (e) {
+    return key.d;
   });
-  let clockOut = this.timeOutEvents.map(function (key) {
-    return key.date;
+  let clockOut = this.timeOutEvents.map(function (e) {
+    return key.d;
   });
   hours = (clockOut.hour - clockIn.hour) / 100;
   return hours;

@@ -17,39 +17,37 @@ function createEmployeeRecords(records) {
   return arr;
 }
 
-// need to use new functions to pass
-
-function createTimeInEvent(record, dateStamp) {
+let createTimeInEvent = function (dateStamp) {
   let [date, hour] = dateStamp.split(" ");
-  record.timeInEvents.push({
+  this.timeInEvents.push({
     type: "TimeIn",
     hour: parseInt(hour, 10),
     date: date,
   });
-  return record;
-}
+  return this;
+};
 
-function createTimeOutEvent(record, dateStamp) {
+let createTimeOutEvent = function (dateStamp) {
   let [date, hour] = dateStamp.split(" ");
-  record.timeOutEvents.push({
+  this.timeOutEvents.push({
     type: "TimeOut",
     hour: parseInt(hour, 10),
     date: date,
   });
-  return record;
-}
+  return this;
+};
 
-function hoursWorkedOnDate(record, date) {
+let hoursWorkedOnDate = function (date) {
   let hours = 0;
-  let clockIn = record.timeInEvents.map(function (key) {
-    return key.date === date;
+  let clockIn = this.timeInEvents.map(function (key) {
+    return key.date;
   });
-  let clockOut = record.timeOutEvents.map(function (key) {
-    return key.date === date;
+  let clockOut = this.timeOutEvents.map(function (key) {
+    return key.date;
   });
   hours = (clockOut.hour - clockIn.hour) / 100;
   return hours;
-}
+};
 
 let allWagesFor = function () {
   let eligibleDates = this.timeInEvents.map(function (e) {

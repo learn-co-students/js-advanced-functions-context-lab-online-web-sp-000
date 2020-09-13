@@ -37,17 +37,12 @@ let createTimeOutEvent = function (dateStamp) {
   return this;
 };
 
-let hoursWorkedOnDate = function (d) {
-  let hours = 0;
-  let clockIn = this.timeInEvents.map(function (e) {
-    return key.d;
-  });
-  let clockOut = this.timeOutEvents.map(function (e) {
-    return key.d;
-  });
-  hours = (clockOut.hour - clockIn.hour) / 100;
-  return hours;
-};
+function hoursWorkedOnDate(date) {
+  let timeIn = this.timeInEvents.filter((d) => d.date === date)[0];
+  let timeOut = this.timeOutEvents.filter((d) => d.date === date)[0];
+
+  return (timeOut.hour - timeIn.hour) / 100;
+}
 
 let allWagesFor = function () {
   let eligibleDates = this.timeInEvents.map(function (e) {

@@ -1,48 +1,12 @@
-function createEmployeeRecord(record) {
-  let clockIn = [];
-  let clockOut = [];
-  let details = {
-    firstName: record[0],
-    familyName: record[1],
-    title: record[2],
-    payPerHour: record[3],
-    timeInEvents: clockIn,
-    timeOutEvents: clockOut,
-  };
-  return details;
-}
+/* Your Code Here */
 
-function createEmployeeRecords(records) {
-  let arr = records.map(createEmployeeRecord);
-  return arr;
-}
-
-let createTimeInEvent = function (dateStamp) {
-  let [date, hour] = dateStamp.split(" ");
-  this.timeInEvents.push({
-    type: "TimeIn",
-    hour: parseInt(hour, 10),
-    date: date,
-  });
-  return this;
-};
-
-let createTimeOutEvent = function (dateStamp) {
-  let [date, hour] = dateStamp.split(" ");
-  this.timeOutEvents.push({
-    type: "TimeOut",
-    hour: parseInt(hour, 10),
-    date: date,
-  });
-  return this;
-};
-
-function hoursWorkedOnDate(date) {
-  let timeIn = this.timeInEvents.filter((d) => d.date === date)[0];
-  let timeOut = this.timeOutEvents.filter((d) => d.date === date)[0];
-
-  return (timeOut.hour - timeIn.hour) / 100;
-}
+/*
+ We're giving you this function. Take a look at it, you might see some usage
+ that's new and different. That's because we're avoiding a well-known, but
+ sneaky bug that we'll cover in the next few lessons!
+ As a result, the lessons for this function will pass *and* it will be available
+ for you to use if you need it!
+ */
 
 let allWagesFor = function () {
   let eligibleDates = this.timeInEvents.map(function (e) {
@@ -58,3 +22,59 @@ let allWagesFor = function () {
 
   return payable;
 };
+
+function createEmployeeRecord(employee) {
+  let emp = {
+    firstName: employee[0],
+    familyName: employee[1],
+    title: employee[2],
+    payPerHour: employee[3],
+    timeInEvents: [],
+    timeOutEvents: [],
+  };
+  return emp;
+}
+
+function createEmployeeRecords(array) {
+  return array.map((employee) => createEmployeeRecord(employee));
+}
+
+function createTimeInEvent(date) {
+  let event = {
+    type: "TimeIn",
+    hour: parseInt(date.split(" ")[1], 10),
+    date: date.split(" ")[0],
+  };
+  this.timeInEvents.push(event);
+  return this;
+}
+
+function hoursWorkedOnDate(date) {
+  let timeIn = this.timeInEvents.filter((d) => d.date === date)[0];
+  let timeOut = this.timeOutEvents.filter((d) => d.date === date)[0];
+
+  return (timeOut.hour - timeIn.hour) / 100;
+}
+
+function wagesEarnedOnDate(date) {
+  // let pay =  this.hoursWorkedOnDate(date).reduce((h, total) => total += h) * this.payPerHour
+  return hoursWorkedOnDate.call(this, date) * this.payPerHour;
+}
+
+function createTimeOutEvent(date) {
+  let event = {
+    type: "TimeOut",
+    hour: parseInt(date.split(" ")[1], 10),
+    date: date.split(" ")[0],
+  };
+  this.timeOutEvents.push(event);
+  return this;
+}
+function findEmployeeByFirstName(collection, firstNameString) {
+  let employee = collection.filter((d) => d.firstName === firstNameString)[0];
+
+  return employee;
+}
+function calculatePayroll(employees) {
+  return employees.reduce((total, e) => allWagesFor.call(e) + total, 0);
+}

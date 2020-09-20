@@ -1,4 +1,58 @@
 /* Your Code Here */
+function createEmployeeRecord(array){
+    const employee = {
+      firstName: array[0],
+      familyName: array[1],
+      title: array[2],
+      payPerHour: array[3],
+      timeInEvents: [],
+      timeOutEvents: []
+    }
+    return employee
+  }
+  
+  function createEmployeeRecords(array) {
+    const employees = array.map(function(e){return createEmployeeRecord(e)})
+    return employees
+  }
+  
+  function createTimeInEvent(time) {
+    const timearr = time.split(" ")
+    const timeIn = {type: "TimeIn",
+                    hour: parseInt(timearr[1]),
+                    date: timearr[0]}
+    this.timeInEvents.push(timeIn)
+    return this
+  }
+  
+  function createTimeOutEvent(time){
+    const timearr = time.split(" ")
+    const timeOut = {type: "TimeOut",
+                     hour: parseInt(timearr[1]),
+                     date: timearr[0]}
+    this.timeOutEvents.push(timeOut)
+    return this
+  }
+  
+  function hoursWorkedOnDate(date){
+    const timeIn = this.timeInEvents.find(e => e.date === date).hour
+    const timeOut = this.timeOutEvents.find(e => e.date === date).hour
+    return (timeOut - timeIn)/100
+  }
+  
+  
+  function wagesEarnedOnDate(date){
+    const hours = hoursWorkedOnDate.call(this, date)
+    return hours * this.payPerHour
+  }
+  
+  function calculatePayroll(employees){
+    return employees.reduce((t, e) => t + allWagesFor.call(e), 0)
+  }
+  
+  function findEmployeeByFirstName(employees, name){
+    return employees.find(s => s.firstName === name)
+  }
 
 /*
  We're giving you this function. Take a look at it, you might see some usage

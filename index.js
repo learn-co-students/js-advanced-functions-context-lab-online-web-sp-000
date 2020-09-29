@@ -64,7 +64,7 @@ let wagesEarnedOnDate = function(date) {
 
 let calculatePayroll = function (employees) {
     return employees.reduce( function(totalWages, employee) {
-        return totalWages + allWagesFor.apply(employee)
+        return totalWages + allWagesFor.call(employee)
     }, 0)
 }
 

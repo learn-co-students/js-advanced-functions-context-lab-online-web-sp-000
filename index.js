@@ -34,8 +34,8 @@ function createTimeOutEvent(stamp) {
 }
 
 function hoursWorkedOnDate(date) {
-	const a = this.timeInEvents.find((item) => { return item.date === date })
-	const b = this.timeOutEvents.find((item) => { return item.date === date })
+	const a = this.timeInEvents.find(item => item.date === date)
+	const b = this.timeOutEvents.find(item => item.date === date)
 	return parseInt(b.hour - a.hour) / 100
 }
 
@@ -44,29 +44,17 @@ function wagesEarnedOnDate(date) {
 }
 
 function allWagesFor() {
-	const workDays = this.timeInEvents.map((inItem) => {
+	const workDays = this.timeInEvents.map(inItem => {
 		return wagesEarnedOnDate.call(this, inItem.date)
 	})
-	return workDays.reduce(function (total, num) { 
-		return total += num
-	}.bind(this))
+	return workDays.reduce((total, num) => total += num)
 }
 
-// let allWagesFor = function () {
-// 	let eligibleDates = this.timeInEvents.map(function (e) {
-// 		return e.date
-// 	})
-// 	let payable = eligibleDates.reduce(function (memo, d) {
-// 		return memo + wagesEarnedOnDate.call(this, d)
-// 	}.bind(this), 0)
-// 	return payable
-// }
-
 function findEmployeeByFirstName(srcArray, firstName) {
-	return srcArray.find((item) => { return item.firstName === firstName })
+	return srcArray.find(item => item.firstName === firstName)
 }
 
 function calculatePayroll(records) {
-	const empPay = records.map((record) => { return allWagesFor.call(record) })
-	return empPay.reduce((total, num) => { return total += num })
+	const empPay = records.map(record => allWagesFor.call(record))
+	return empPay.reduce((total, num) => total += num)
 }

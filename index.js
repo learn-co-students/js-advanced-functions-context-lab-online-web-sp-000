@@ -37,11 +37,12 @@ function createEmployeeRecords(empsInfo){
   return empsInfo.map( empInfo => createEmployeeRecord(empInfo))
 }
 
-let createTimeInEvent = function(){
+let createTimeInEvent = function(date){
   console.log(this)
+  console.log("date: " date)
   console.log(this.timeInEvents)
   console.log(arguments[0])
-  let timeInEvent = this.timeInEvents.push(
+  this.timeInEvents.push(
     {
       type: "TimeIn",
       hour: parseInt(arguments[0].split(' ')[1]),

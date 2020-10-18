@@ -1,22 +1,60 @@
-/* Your Code Here */
+function createEmployeeRecord(data) {
+	return {
+		firstName: data[0],
+		familyName: data[1],
+		title: data[2],
+		payPerHour: data[3],
+		timeInEvents: [],
+		timeOutEvents: []
+	}
+}
 
-/*
- We're giving you this function. Take a look at it, you might see some usage
- that's new and different. That's because we're avoiding a well-known, but
- sneaky bug that we'll cover in the next few lessons!
+function createEmployeeRecords(records) {
+	return records.map(createEmployeeRecord)
+}
 
- As a result, the lessons for this function will pass *and* it will be available
- for you to use if you need it!
- */
+function createTimeInEvent(stamp) {
+	const dateTime = stamp.split(' ')
+	this.timeInEvents.push({
+		type: 'TimeIn',
+		date: dateTime[0],
+		hour: parseInt(dateTime[1])
+	})
+	return this
+}
 
-let allWagesFor = function () {
-    let eligibleDates = this.timeInEvents.map(function (e) {
-        return e.date
-    })
+function createTimeOutEvent(stamp) {
+	const dateTime = stamp.split(' ')
+	this.timeOutEvents.push({
+		type: 'TimeOut',
+		date: dateTime[0],
+		hour: parseInt(dateTime[1])
+	})
+	return this
+}
 
-    let payable = eligibleDates.reduce(function (memo, d) {
-        return memo + wagesEarnedOnDate.call(this, d)
-    }.bind(this), 0) // <== Hm, why did we need to add bind() there? We'll discuss soon!
+function hoursWorkedOnDate(date) {
+	const a = this.timeInEvents.find(item => item.date === date)
+	const b = this.timeOutEvents.find(item => item.date === date)
+	return parseInt(b.hour - a.hour) / 100
+}
 
-    return payable
+function wagesEarnedOnDate(date) {
+	return hoursWorkedOnDate.call(this, date) * this.payPerHour
+}
+
+function allWagesFor() {
+	const workDays = this.timeInEvents.map(inItem => {
+		return wagesEarnedOnDate.call(this, inItem.date)
+	})
+	return workDays.reduce((total, num) => total += num)
+}
+
+function findEmployeeByFirstName(srcArray, firstName) {
+	return srcArray.find(item => item.firstName === firstName)
+}
+
+function calculatePayroll(records) {
+	const empPay = records.map(record => allWagesFor.call(record))
+	return empPay.reduce((total, num) => total += num)
 }

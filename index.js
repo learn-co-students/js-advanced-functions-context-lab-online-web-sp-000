@@ -29,20 +29,51 @@ const createEmployeeRecord = (employee) => {
 }
 
 const createEmployeeRecords = (employees) => {
-    //  Argument(s)
-    //  Array of Arrays
-    //  Returns
-    //  Array of Objects
-    //  Behavior
-    //  Converts each nested Array into an employee record 
-    // using createEmployeeRecord and accumulates it to a 
-    // new Array
     let employee = []
     for (let i = 0; i < employees.length; i++) {
         employee.push(createEmployeeRecord.call(this, employees[i]))
     }
     return employee
 }
+4
+
+const createTimeInEvent = (dateStamp) => {
+    let event = {
+        timeInEvents: [{
+            type: "TimeIn",
+            hour: Number(dateStamp.split(" ")[1]),
+            date: dateStamp.split(" ")[0]
+        }]
+    }
+
+    return event
+}
+
+const createTimeOutEvent = (dateStamp) => {
+        let event = {
+            timeOutEvents: [{
+                type: "TimeOut",
+                hour: Number(dateStamp.split(" ")[1]),
+                date: dateStamp.split(" ")[0]
+            }]
+        }
+        return event
+
+    }
+    // hoursWorkedOnDate
+    // Argument(s)
+    // A date of the form "YYYY-MM-DD"
+    // Returns
+    // Hours worked, an Integer
+    // Behavior
+    // Given a date, find the number of hours elapsed between that date 's timeInEvent and timeOutEvent
+    // wagesEarnedOnDate
+    // Argument(s)
+    // A date of the form "YYYY-MM-DD"
+    // Returns
+    // Pay owed
+    // Behavior
+    // Using hoursWorkedOnDate, multiply the hours by the record 's payRate to determine amount owed. Amount should be returned as a number.
 
 let allWagesFor = function() {
     let eligibleDates = this.timeInEvents.map(function(e) {

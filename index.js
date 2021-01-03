@@ -17,7 +17,7 @@
 // 6) initializes a field, timeInEvents, to hold an empty Array
 // 7) initializes a field, timeOutEvents, to hold an empty Array
 const createEmployeeRecord = (employee) => {
-    return {
+    let newEmployee = {
         firstName: employee[0],
         familyName: employee[1],
         title: employee[2],
@@ -25,6 +25,7 @@ const createEmployeeRecord = (employee) => {
         timeInEvents: [],
         timeOutEvents: []
     }
+    return newEmployee
 }
 
 let allWagesFor = function() {

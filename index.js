@@ -17,7 +17,7 @@
 // 6) initializes a field, timeInEvents, to hold an empty Array
 // 7) initializes a field, timeOutEvents, to hold an empty Array
 const createEmployeeRecord = (employee) => {
-    return {
+    let newEmployeeRecord = {
         firstName: employee[0],
         familyName: employee[1],
         title: employee[2],
@@ -25,6 +25,23 @@ const createEmployeeRecord = (employee) => {
         timeInEvents: [],
         timeOutEvents: []
     }
+    return newEmployeeRecord
+}
+
+const createEmployeeRecords = (employees) => {
+    //  Argument(s)
+    //  Array of Arrays
+    //  Returns
+    //  Array of Objects
+    //  Behavior
+    //  Converts each nested Array into an employee record 
+    // using createEmployeeRecord and accumulates it to a 
+    // new Array
+    let employee = []
+    for (let i = 0; i < employees.length; i++) {
+        employee.push(createEmployeeRecord.call(this, employees[i]))
+    }
+    return employee
 }
 
 let allWagesFor = function() {

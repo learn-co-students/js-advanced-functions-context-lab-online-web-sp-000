@@ -82,29 +82,31 @@ let wagesEarnedOnDate = function(date) {
     return wagesEarned
 }
 
-// findEmployeeByFirstName
-// Argument(s)
-// srcArray: Array of employee records
-// firstName: String representing a first name held in an employee record
-// Returns
-// Matching record or undefined
-// Behavior
-// Test the firstName field
-// for a match with the firstName
+let findEmployeeByFirstName = function(employees, firstName) {
+    // Argument(s)
+    // srcArray: Array of employee records
+    // firstName: String representing a first name held in an employee record
+    // Returns
+    // Matching record or undefined
+    // Behavior
+    // Test the firstName field
+    // for a match with the firstName
+}
 
-// calculatePayroll
-// Argument(s)
-// Array of employee records
-// Returns
-// Pay owed
-// for all dates
-// Behavior
-// Using wagesEarnedOnDate,
-// accumulate the value of
-// all dates worked by the
-// employee in the record
-// used as context.Amount
-// should be returned as a number.
+let calculatePayroll = function(employees) {
+    // Argument(s)
+    // Array of employee records
+    // Returns
+    // Pay owed
+    // for all dates
+    // Behavior
+    // Using wagesEarnedOnDate,
+    // accumulate the value of
+    // all dates worked by the
+    // employee in the record
+    // used as context.Amount
+    // should be returned as a number.
+}
 
 let allWagesFor = function() {
     let eligibleDates = this.timeInEvents.map(function(e) {

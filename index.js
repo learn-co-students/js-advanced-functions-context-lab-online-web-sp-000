@@ -16,8 +16,8 @@
 // 5) populates a payPerHour field from the 3 th element
 // 6) initializes a field, timeInEvents, to hold an empty Array
 // 7) initializes a field, timeOutEvents, to hold an empty Array
-const createEmployeeRecord = (employee) => {
-    let newEmployeeRecord = {
+let createEmployeeRecord = function(employee) {
+    return {
         firstName: employee[0],
         familyName: employee[1],
         title: employee[2],
@@ -25,40 +25,36 @@ const createEmployeeRecord = (employee) => {
         timeInEvents: [],
         timeOutEvents: []
     }
-    return newEmployeeRecord
 }
 
-const createEmployeeRecords = (employees) => {
-    let employee = []
-    for (let i = 0; i < employees.length; i++) {
-        employee.push(createEmployeeRecord.call(this, employees[i]))
-    }
-    return employee
+let createEmployeeRecords = function(employees) {
+    //  let employee = []
+    //  for (let i = 0; i < employees.length; i++) {
+    //      employee.push(createEmployeeRecord.call(this, employees[i]))
+    //  }
+    return employees.map((emp) => {
+        return createEmployeeRecord.call(this, emp)
+            //   return createEmployeeRecord(emp)
+    })
 }
-4
 
-const createTimeInEvent = (dateStamp) => {
-    let event = {
-        timeInEvents: [{
-            type: "TimeIn",
+
+let createTimeInEvent = function(dateStamp) {
+    this.timeInEvents.push({
+        type: "TimeIn",
+        hour: Number(dateStamp.split(" ")[1]),
+        date: dateStamp.split(" ")[0]
+    })
+    return this
+}
+
+let createTimeOutEvent = function(dateStamp) {
+        this.timeOutEvents.push({
+            type: "TimeOut",
             hour: Number(dateStamp.split(" ")[1]),
             date: dateStamp.split(" ")[0]
-        }]
-    }
-
-    return event
-}
-
-const createTimeOutEvent = (dateStamp) => {
-        let event = {
-            timeOutEvents: [{
-                type: "TimeOut",
-                hour: Number(dateStamp.split(" ")[1]),
-                date: dateStamp.split(" ")[0]
-            }]
-        }
-        return event
-
+        })
+        return this
     }
     // hoursWorkedOnDate
     // Argument(s)

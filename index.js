@@ -49,27 +49,62 @@ let createTimeInEvent = function(dateStamp) {
 }
 
 let createTimeOutEvent = function(dateStamp) {
-        this.timeOutEvents.push({
-            type: "TimeOut",
-            hour: Number(dateStamp.split(" ")[1]),
-            date: dateStamp.split(" ")[0]
-        })
-        return this
-    }
-    // hoursWorkedOnDate
+    this.timeOutEvents.push({
+        type: "TimeOut",
+        hour: Number(dateStamp.split(" ")[1]),
+        date: dateStamp.split(" ")[0]
+    })
+    return this
+}
+let hoursWorkedOnDate = function(date) {
     // Argument(s)
     // A date of the form "YYYY-MM-DD"
     // Returns
     // Hours worked, an Integer
     // Behavior
     // Given a date, find the number of hours elapsed between that date 's timeInEvent and timeOutEvent
-    // wagesEarnedOnDate
+    let timeInHour = this.timeInEvents.find(event => event.date === date).hour
+    let timeOutHour = this.timeOutEvents.find(event => event.date === date).hour
+    let hoursWorked = (timeOutHour - timeInHour) / 100
+    return hoursWorked
+}
+
+let wagesEarnedOnDate = function(date) {
     // Argument(s)
     // A date of the form "YYYY-MM-DD"
     // Returns
     // Pay owed
     // Behavior
-    // Using hoursWorkedOnDate, multiply the hours by the record 's payRate to determine amount owed. Amount should be returned as a number.
+    // Using hoursWorkedOnDate, multiply the hours by the record 's
+    // payRate to determine amount owed.Amount should be returned as a number.
+    let hoursWorked = hoursWorkedOnDate.call(this, date)
+    let wagesEarned = this.payPerHour * hoursWorked
+    return wagesEarned
+}
+
+// findEmployeeByFirstName
+// Argument(s)
+// srcArray: Array of employee records
+// firstName: String representing a first name held in an employee record
+// Returns
+// Matching record or undefined
+// Behavior
+// Test the firstName field
+// for a match with the firstName
+
+// calculatePayroll
+// Argument(s)
+// Array of employee records
+// Returns
+// Pay owed
+// for all dates
+// Behavior
+// Using wagesEarnedOnDate,
+// accumulate the value of
+// all dates worked by the
+// employee in the record
+// used as context.Amount
+// should be returned as a number.
 
 let allWagesFor = function() {
     let eligibleDates = this.timeInEvents.map(function(e) {

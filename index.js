@@ -4,7 +4,6 @@
  We're giving you this function. Take a look at it, you might see some usage
  that's new and different. That's because we're avoiding a well-known, but
  sneaky bug that we'll cover in the next few lessons!
-
  As a result, the lessons for this function will pass *and* it will be available
  for you to use if you need it!
  */
@@ -38,7 +37,6 @@ let createEmployeeRecords = function(employees) {
     })
 }
 
-
 let createTimeInEvent = function(dateStamp) {
     this.timeInEvents.push({
         type: "TimeIn",
@@ -56,13 +54,8 @@ let createTimeOutEvent = function(dateStamp) {
     })
     return this
 }
+
 let hoursWorkedOnDate = function(date) {
-    // Argument(s)
-    // A date of the form "YYYY-MM-DD"
-    // Returns
-    // Hours worked, an Integer
-    // Behavior
-    // Given a date, find the number of hours elapsed between that date 's timeInEvent and timeOutEvent
     let timeInHour = this.timeInEvents.find(event => event.date === date).hour
     let timeOutHour = this.timeOutEvents.find(event => event.date === date).hour
     let hoursWorked = (timeOutHour - timeInHour) / 100
@@ -70,13 +63,6 @@ let hoursWorkedOnDate = function(date) {
 }
 
 let wagesEarnedOnDate = function(date) {
-    // Argument(s)
-    // A date of the form "YYYY-MM-DD"
-    // Returns
-    // Pay owed
-    // Behavior
-    // Using hoursWorkedOnDate, multiply the hours by the record 's
-    // payRate to determine amount owed.Amount should be returned as a number.
     let hoursWorked = hoursWorkedOnDate.call(this, date)
     let wagesEarned = this.payPerHour * hoursWorked
     return wagesEarned
@@ -91,6 +77,8 @@ let findEmployeeByFirstName = function(employees, firstName) {
     // Behavior
     // Test the firstName field
     // for a match with the firstName
+    let matchedEmployee = employees.find((emp) => emp.firstName === firstName)
+    return matchedEmployee
 }
 
 let calculatePayroll = function(employees) {

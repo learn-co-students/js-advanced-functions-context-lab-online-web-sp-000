@@ -7,14 +7,7 @@
  As a result, the lessons for this function will pass *and* it will be available
  for you to use if you need it!
  */
-
-// createEmployeeRecord
-// 2) populates a firstName field from the 0 th element
-// 3) populates a familyName field from the 1 th element
-// 4) populates a title field from the 2 th element
-// 5) populates a payPerHour field from the 3 th element
-// 6) initializes a field, timeInEvents, to hold an empty Array
-// 7) initializes a field, timeOutEvents, to hold an empty Array
+ 
 let createEmployeeRecord = function(employee) {
     return {
         firstName: employee[0],
@@ -27,13 +20,8 @@ let createEmployeeRecord = function(employee) {
 }
 
 let createEmployeeRecords = function(employees) {
-    //  let employee = []
-    //  for (let i = 0; i < employees.length; i++) {
-    //      employee.push(createEmployeeRecord.call(this, employees[i]))
-    //  }
     return employees.map((emp) => {
         return createEmployeeRecord.call(this, emp)
-            //   return createEmployeeRecord(emp)
     })
 }
 
@@ -69,31 +57,14 @@ let wagesEarnedOnDate = function(date) {
 }
 
 let findEmployeeByFirstName = function(employees, firstName) {
-    // Argument(s)
-    // srcArray: Array of employee records
-    // firstName: String representing a first name held in an employee record
-    // Returns
-    // Matching record or undefined
-    // Behavior
-    // Test the firstName field
-    // for a match with the firstName
     let matchedEmployee = employees.find((emp) => emp.firstName === firstName)
     return matchedEmployee
 }
 
 let calculatePayroll = function(employees) {
-    // Argument(s)
-    // Array of employee records
-    // Returns
-    // Pay owed
-    // for all dates
-    // Behavior
-    // Using wagesEarnedOnDate,
-    // accumulate the value of
-    // all dates worked by the
-    // employee in the record
-    // used as context.Amount
-    // should be returned as a number.
+    let payOwed = employees.map(empRecord => allWagesFor.call(empRecord))
+                           .reduce((acc, empPay) => acc + empPay)
+    return payOwed
 }
 
 let allWagesFor = function() {

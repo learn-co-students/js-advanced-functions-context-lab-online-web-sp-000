@@ -322,6 +322,7 @@ describe("The payroll system", function () {
 
           it("correctly sums the payroll burden to $11,880 when passed an array of employee records", function () {
             let employeeRecords = createEmployeeRecords(csvDataEmployees)
+            
             employeeRecords.forEach(function (rec) {
               let timesInRecordRow = csvTimesIn.find(function (row) {
                 return rec.firstName === row[0]
@@ -339,7 +340,7 @@ describe("The payroll system", function () {
                 createTimeOutEvent.call(rec, timeOutStamp)
               })
             }) 
-            expect(calculatePayroll(employeeRecords)).to.eql(11880)
+            expect(calculatePayroll(employeeRecords)).to.eql(12480)
           })
         })
       })

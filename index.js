@@ -1,4 +1,4 @@
-function createEmployeeRecord(array) {
+let createEmployeeRecord = function(array) {
     return Object.assign({}, {
          firstName: array[0],
          familyName: array[1],
@@ -9,11 +9,11 @@ function createEmployeeRecord(array) {
      });
  }
  
- function createEmployeeRecords(array) {
+ let createEmployeeRecords = function(array) {
      return array.map(a => createEmployeeRecord(a))
  }
  
- function createTimeInEvent(dateStamp) {
+ let createTimeInEvent = function(dateStamp) {
      let hour = parseInt(dateStamp.split(' ')[1])
      let day = dateStamp.split(' ')[0]
      this.timeInEvents.push({
@@ -24,7 +24,7 @@ function createEmployeeRecord(array) {
      return this
  }
  
- function createTimeOutEvent(dateStamp) {
+ let createTimeOutEvent = function(dateStamp) {
      let hour = parseInt(dateStamp.split(' ')[1])
      let day = dateStamp.split(' ')[0]
      this.timeOutEvents.push({
@@ -35,25 +35,25 @@ function createEmployeeRecord(array) {
      return this
  }
  
- function hoursWorkedOnDate(dateStamp) {
+ let hoursWorkedOnDate = function(dateStamp) {
      let timeIn = this.timeInEvents.find(time => time.date === dateStamp)
      let timeOut = this.timeOutEvents.find(time => time.date === dateStamp)
      let hoursWorked = parseInt(timeOut.hour - timeIn.hour)/100
      return hoursWorked
  }
  
- function wagesEarnedOnDate(dateStamp) {
+ let wagesEarnedOnDate = function(dateStamp) {
      let hours = hoursWorkedOnDate.call(this, dateStamp)
      let wagePerHour = this.payPerHour
      let wagesEarned = hours * wagePerHour
      return wagesEarned
  }
  
- function findEmployeeByFirstName(array, name){
+ let findEmployeeByFirstName = function(array, name) {
      return array.find(a => {return a.firstName === name})
  }
  
- function calculatePayroll(records) {
+ let calculatePayroll = function(records) {
      let wagesArray = records.map(record => allWagesFor.call(record))
      return wagesArray.reduce((total, element, start = 0) => total = total + element)
  }
